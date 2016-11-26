@@ -1,0 +1,37 @@
+
+/**
+ *
+ * @author harshal
+ */
+public class MatrixChainMultiplication {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        int arr[] = {4, 2, 3, 5, 3};
+        int dp[][] = new int[arr.length][arr.length];
+        int q = 0;
+        for (int l = 2; l < arr.length; l++) {
+            for (int i = 0; i < arr.length - l; i++) {
+                int j = i + l;
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int k = i + 1; k < j; k++) {
+                    q = dp[i][k] + dp[k][j] + arr[i] * arr[k] * arr[j];
+                    if (q < dp[i][j]) {
+                        dp[i][j] = q;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 1; j < arr.length; j++) {
+                System.out.print(dp[i][j] + " ");
+
+            }
+            System.out.println("");
+        }
+
+    }
+}
